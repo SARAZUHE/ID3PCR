@@ -5,6 +5,9 @@
  */
 package Simulation;
 
+import EvaluationFunction.LefeverL;
+import EvaluationFunction.Lefever;
+import EvaluationFunction.ManagerParametersPCR;
 import Tree.DecisionTree;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -34,7 +37,29 @@ public class Id3UProject {
         String option =in.nextLine();
         //Genera el dataSet según el archivo elegido  
         dataSet = dataSetUpload(option);   
-        System.out.println("numero de instancias: "+ (dataSet.length-1));
+        //System.out.println("numero de instancias: "+ (dataSet.length-1));
+        
+        
+        //ArrayList<Double> lef =new ArrayList<>();
+        Lefever lefever = new Lefever();
+        lefever.initLefeverR(6, 0, 2000);
+        //System.out.println(lefever);
+              
+        //System.out.println(lef.get(3-1));
+        /*
+        System.out.println("por entrar");
+        double evaluationFirstPart = ManagerParametersPCR.evaluationWindow(dataSet, 20, 5);
+        System.out.println("entro ");
+        System.out.println(evaluationFirstPart);
+        
+        
+        */
+      
+        
+        
+        
+        //double evaluation = ManagerParametersPCR.evaluationWindow(dataSet, 769, 10);
+        //System.out.println("evaluation: "+evaluation );
         
         
         /*
@@ -61,10 +86,13 @@ public class Id3UProject {
         //System.out.println(attr);       
       
         
-        DecisionTree id3_tree = Id3U.decisionTreeLearner(dataSet,null , null);
-        System.out.println("MUESTRA ARBOL");
-        ManagerDisplayU.displayTree(id3_tree);            
-        System.out.println("TERMINA");
+        //DecisionTree id3_tree = Id3U.decisionTreeLearner(dataSet,null , null);
+        //System.out.println("MUESTRA ARBOL");
+        //ManagerDisplayU.displayTree(id3_tree);            
+        //System.out.println("TERMINA");
+        
+        
+        
         
     }
     

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package id3u;
+package EvaluationFunction;
 
+import id3u.ManagerDataSetU;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -16,23 +17,30 @@ import java.util.Enumeration;
 public class ManagerParametersPCR {
     
     
-    private ArrayList<Double> reference;
-    
-    
-    
+     
     
     public static double evaluationWindow(String [][] dataSet, int A, int windowSize){
         
         double evaluation;
-        evaluation = A;// por corregir 
+        double entropy;
+        double lef;
         
-        
-        
-        
-        
-        
+        evaluation = 0;// por corregir 
+        entropy=0;
+        lef = 0;
+        Lefever lefever = new Lefever();  
+        //lefever.initLefeverR(windowSize);
+        int j=0;
+        int tope = A+windowSize;
+        for(int i=A; i<=tope; i++){
+            A=i; 
+            evaluation += calc_entropyAttribute(dataSet,A)*lefever.getWR(j);
+            j++;
+            System.out.println("evaluacion: "+ evaluation);   
+        }     
         return evaluation;
     }
+    
     
     public static double calc_entropyAttribute(String dataSet [][], int A){
         ArrayList<String> enumValues;        
