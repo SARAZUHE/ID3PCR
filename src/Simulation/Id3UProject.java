@@ -5,9 +5,7 @@
  */
 package Simulation;
 
-import EvaluationFunction.LefeverL;
-import EvaluationFunction.Lefever;
-import EvaluationFunction.ManagerParametersPCR;
+import EvaluationFunction.EvaluationWindow;
 import Tree.DecisionTree;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -39,10 +37,11 @@ public class Id3UProject {
         dataSet = dataSetUpload(option);   
         //System.out.println("numero de instancias: "+ (dataSet.length-1));
         
-        
-        //ArrayList<Double> lef =new ArrayList<>();
-        Lefever lefever = new Lefever();
-        lefever.initLefeverR(6, 0, 2000);
+        EvaluationWindow ev = new EvaluationWindow(dataSet,600,10);
+        ev.evaluationA();
+   
+        //Lefever lefever = new Lefever(6, 769, 2000);
+        //lefever.initLefever();
         //System.out.println(lefever);
               
         //System.out.println(lef.get(3-1));
