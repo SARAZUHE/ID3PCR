@@ -6,6 +6,7 @@
 package Simulation;
 
 import EvaluationFunction.EvaluationWindow;
+import EvaluationFunction.Lefever;
 import Tree.DecisionTree;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -33,35 +34,25 @@ public class Id3UProject {
         System.out.println("INDIQUE EL NÚMERO DE ATRIBUTOS PARA EL ANÁLISIS --NÚMERO ENTRE 1 Y 5--");
         Scanner in = new Scanner (System.in); //Creación de un objeto Scanner
         String option =in.nextLine();
-        //Genera el dataSet según el archivo elegido  
         dataSet = dataSetUpload(option);   
-        //System.out.println("numero de instancias: "+ (dataSet.length-1));
         
-        EvaluationWindow ev = new EvaluationWindow(dataSet,600,10);
-        ev.evaluationA();
+     
+        
+        //EvaluationWindow.evaluationA(dataSet,769,10);
+        
+        DecisionTree id3_tree = Id3U.decisionTreeLearner(dataSet,null , null);
+        System.out.println("MUESTRA ARBOL");
+        ManagerDisplayU.displayTree(id3_tree);            
+        System.out.println("TERMINA");
+
+        
+        //EvaluationWindow.evaluationA(dataSet,769,10);
+        
    
-        //Lefever lefever = new Lefever(6, 769, 2000);
-        //lefever.initLefever();
-        //System.out.println(lefever);
-              
-        //System.out.println(lef.get(3-1));
-        /*
-        System.out.println("por entrar");
-        double evaluationFirstPart = ManagerParametersPCR.evaluationWindow(dataSet, 20, 5);
-        System.out.println("entro ");
-        System.out.println(evaluationFirstPart);
         
-        
-        */
       
         
-        
-        
-        //double evaluation = ManagerParametersPCR.evaluationWindow(dataSet, 769, 10);
-        //System.out.println("evaluation: "+evaluation );
-        
-        
-        /*
+ /*
         v_dataSet = ManagerDataSetA.remove(dataSet, 2);
         
         for(int i =0; i<v_dataSet.length; i++){
@@ -85,10 +76,7 @@ public class Id3UProject {
         //System.out.println(attr);       
       
         
-        //DecisionTree id3_tree = Id3U.decisionTreeLearner(dataSet,null , null);
-        //System.out.println("MUESTRA ARBOL");
-        //ManagerDisplayU.displayTree(id3_tree);            
-        //System.out.println("TERMINA");
+        
         
         
         
@@ -104,7 +92,7 @@ public class Id3UProject {
         String readDataSet;
         String [][] dataSet;        
         
-        b = new BufferedReader(new FileReader ("C:\\Users\\SARA\\Documents\\NetBeansProjects\\ID3U\\src\\data\\7_HCVL_"+ option + ".csv")); 
+        b = new BufferedReader(new FileReader ("C:\\Users\\SARA\\Documents\\NetBeansProjects\\ID3PCR\\src\\data\\7_HCVL_"+ option + ".csv")); 
                 //convierte la base de datos a una cadena para poder pasarla a una matriz
                 readDataSet   = readBuffer(b);
                 

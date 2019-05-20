@@ -15,114 +15,114 @@ import java.util.Enumeration;
  * @author SARA
  */
 public class EvaluationWindow {
-    private ArrayList<Double> lefeverR = new ArrayList<>();
-    private ArrayList<Double> lefeverL = new ArrayList<>();
-    private int mWindowSize, mA;
-    private double lefValueZero     = 0.687;  
-    private double lefValueOne      = 0.057;
-    private double lefValueTwo      = 0.031;
-    private double lefValueThree    = 0.016;
-    private double lefValueFour     = 0.012;
-    private double lefValueInfinite = 0.014;
-    private String mDataSet [][];
+    private static ArrayList<Double> lefeverR = new ArrayList<>();
+    private static ArrayList<Double> lefeverL = new ArrayList<>();
+
+    private static  double lefValueZero     = 0.687;  
+    private static double lefValueOne      = 0.057;
+    private static double lefValueTwo      = 0.031;
+    private static double lefValueThree    = 0.016;
+    private static double lefValueFour     = 0.012;
+    private static double lefValueInfinite = 0.014;
+    private static double sum;
+
 
      
     
-    public EvaluationWindow(String [][] dataSet, int A, int windowSize){
-        this.mDataSet = dataSet;
-        this.mWindowSize = windowSize;
-        this.mA = A;
-    }
+
     
 
-    public double evaluationA(){
+    public static double evaluationA(String [][] dataSet, int A, int windowSize){
         
-        double sum =0;
+        
       
         //Izquierda
-        int pivot = mA-1;
+        int pivotL = A-1;
         int index = 0;
         double evaluation =0;
-        while (pivot >= 0 && index < mWindowSize) {
+        while (pivotL > 0 && index < windowSize) {
             switch (index) {
                 case 0:                    
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueOne;
+                    evaluation = calc_entropyAttribute(dataSet, pivotL)*lefValueOne;
                     lefeverL.add(evaluation);
                     break;
                 case 1:
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueTwo;
+                    evaluation = calc_entropyAttribute(dataSet, pivotL)*lefValueTwo;
                     lefeverL.add(evaluation);
                     break;
                 case 2:
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueThree;
+                    evaluation = calc_entropyAttribute(dataSet, pivotL)*lefValueThree;
                     lefeverL.add(evaluation);
                     break;
                 case 3:            
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueFour;
+                    evaluation = calc_entropyAttribute(dataSet, pivotL)*lefValueFour;
                     lefeverL.add(evaluation);
                     break;
                 default:
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueInfinite;
+                    evaluation = calc_entropyAttribute(dataSet, pivotL)*lefValueInfinite;
                     lefeverL.add(evaluation);
                     break;
             }                        
             index++;
-            pivot--;
+            pivotL--;
         }
   
         //Derecha
-        pivot = mA;
+        int pivotR = A;
         index = 0;
         evaluation =0;
-        while (pivot <= mDataSet[0].length && index <= mWindowSize) {
+        while (pivotR < dataSet[0].length && index <= windowSize) {
             switch (index) {
                 case 0:
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueZero;
+                    evaluation = calc_entropyAttribute(dataSet, pivotR)*lefValueZero;
                     lefeverR.add(evaluation);                   
                     break;
                 case 1:
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueOne;
+                    evaluation = calc_entropyAttribute(dataSet, pivotR)*lefValueOne;
                     lefeverR.add(evaluation); 
                     break;
                 case 2:
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueTwo;
+                    evaluation = calc_entropyAttribute(dataSet, pivotR)*lefValueTwo;
                     lefeverR.add(evaluation); 
                     break;
                 case 3:
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueThree;
+                    evaluation = calc_entropyAttribute(dataSet, pivotR)*lefValueThree;
                     lefeverR.add(evaluation); 
                     break;            
                 case 4:
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueFour;
+                    evaluation = calc_entropyAttribute(dataSet, pivotR)*lefValueFour;
                     lefeverR.add(evaluation); 
                     break;
                 default:
-                    evaluation = calc_entropyAttribute(mDataSet, pivot)*lefValueInfinite;
+                    evaluation = calc_entropyAttribute(dataSet, pivotR)*lefValueInfinite;
                     lefeverR.add(evaluation); 
                     break;
             }                        
             index++;
-            pivot++;
+            pivotR++;
         }      
         
         lefeverL.addAll(lefeverR);
         
-        int i = 0;
-       
+
+        sum =0;
         for (Double ob: lefeverL) {    
             
             sum += ob;      
             
         }       
 
-        System.out.println("evaluacion de la ventana:" + sum);
+        //System.out.println("evaluacion de la ventana:" + sum);
+        
+        lefeverL.clear();
+        lefeverR.clear();
         
             
         return sum;
     }
        
     
-    public static double calc_entropyAttribute(String dataSet [][], int A){
+    private static double calc_entropyAttribute(String dataSet [][], int A){
         ArrayList<String> enumValues;        
         double entropy = 0;   
         

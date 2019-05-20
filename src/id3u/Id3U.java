@@ -5,6 +5,7 @@
  */
 package id3u;
 
+import EvaluationFunction.EvaluationWindow;
 import Tree.DecisionTree;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,21 +73,20 @@ public class Id3U {
 	
         Attribute selectedAttribute = new Attribute();
         int A, aux;        
-        double gain, maxGain;        
+        double gainEv, maxGainEv;        
         A = 1;
         aux =  1 ;
+        int size=5;
         
-        gain = ManagerInfoGainU.calc_infoGain(dataSet,A);        
-        maxGain= gain;  
+        gainEv = ManagerInfoGainU.calc_infoGain(dataSet,A)*EvaluationWindow.evaluationA(dataSet, A, size);    
+        
+        maxGainEv= gainEv;  
         
         for(int j=1;j<dataSet[0].length;j++){   
             A=j;
-            gain = ManagerInfoGainU.calc_infoGain(dataSet, A);
-           
-            //System.out.println("Attributo "+j+" Gain: "+gain);
-            
-            if(gain>maxGain){                
-                maxGain = gain;  
+            gainEv = ManagerInfoGainU.calc_infoGain(dataSet, A)*EvaluationWindow.evaluationA(dataSet, A, size);           
+            if(gainEv>maxGainEv){                
+                maxGainEv = gainEv;  
                 aux=j;               
             }           
         }
